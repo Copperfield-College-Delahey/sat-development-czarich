@@ -35,4 +35,7 @@ timerFrame = ctk.CTkFrame(mainFrame, fg_color="#f0e6d2")
 timerFrame.grid(row=0, column=0, sticky="nsew", padx=5, pady=5)
 timerLabel = ctk.CTkLabel(timerFrame, text="25:00", font=("Belleza", 48))
 timerLabel.grid(row=0, column=0, pady=30)
+# Configure the timer frame to center content 
+timerFrame.grid_rowconfigure(0, weight=1)
+timerFrame.grid_columnconfigure(0, weight=1)
 app.mainloop()
