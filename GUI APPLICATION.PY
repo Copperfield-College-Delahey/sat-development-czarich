@@ -28,22 +28,57 @@ tasksButton.grid(row=1, column=5, sticky="w", padx=5)
 # Main Content Area 
 mainFrame = ctk.CTkFrame(app)
 mainFrame.grid(row=1, column=0, sticky="nsew", padx=10, pady=10)
-mainFrame.grid_columnconfigure((0,1), weight=1)
-mainFrame.grid_columnconfigure((0,1,2,3), weight=1)
-# Pomodoro Timer (Left) - centered with circle
-timerFrame = ctk.CTkFrame(mainFrame, fg_color="#f3f1ec")
-timerFrame.grid(row=0, column=0, sticky="nsew", padx=5, pady=5)
-timerLabel = ctk.CTkLabel(timerFrame, text="25:00", font=("Times New Roman Condensed", 48))
-timerLabel.grid(row=0, column=0, pady=30)
-# Configure the timer frame to center content 
+mainFrame.grid_rowconfigure(0, weight=1)
+mainFrame.grid_columnconfigure(0, weight=1)
+# Configure the timer frame to align left
+timerFrame=ctk.CTkFrame(mainFrame)
+timerFrame.grid(row=0, column=0, sticky="nw", padx=20, pady=20)
 timerFrame.grid_rowconfigure(0, weight=1)
 timerFrame.grid_columnconfigure(0, weight=1)
+#Create a circular frame for the timer 
+circularFrame= ctk.CTkFrame(timerFrame,
+                            width=200,
+                            height=200,
+                            corner_radius=100, #Makes it circular
+                            fg_color="#f5e6a3", #Light brown color 
+                            border_width=4,
+                            border_color="#d4a574") #Darker brown border
+circularFrame.grid(row=0, column=0, padx=20, pady=20)
+circularFrame.grid_propagate(False) #Maintain the size 
+circularFrame.grid_rowconfigure(0, weight=1)
+circularFrame.grid_columnconfigure(0, weight=1)
+
+timerLabel = ctk.CTkLabel(circularFrame,
+                          text="25:00", 
+                          font=("Consolas", 36), 
+                          text_color="#5d4e37")
+timerLabel.grid(row=0, column=0)
+
 controlsFrame = ctk.CTkFrame(timerFrame)
 controlsFrame.grid(row=1, column=0, pady=10)
-pauseButton = ctk.CTkButton(controlsFrame, text_color="black", font=("Belleza", 30), text ="⏸️", width=60, height=50, fg_color="#f9f4f4", hover_color="#6dc6e6", border_width=0)
+pauseButton = ctk.CTkButton(controlsFrame, text_color="black", font=("Belleza", 30), text ="⏸️", width=60, height=50, corner_radius=25, fg_color="#87CEEB", hover_color="#7BC4E8", border_width=0)
 pauseButton.grid (row=0, column=0, padx=15, pady=10)
 heartButton = ctk.CTkButton(controlsFrame, text_color="pink", font=("Belleza", 30), text="🩷", width=60, height=50, fg_color="#fd9ef8", hover_color="#6dc6e6", border_width=0 )
 heartButton.grid (row=0, column=1, padx=15, pady=10)
 coffeeButton = ctk.CTkButton(controlsFrame, text_color="brown", font=("Belleza", 30), text="☕", width=60, height=50,  fg_color="#dab185", hover_color="#6dc6e6", border_width=0)
 coffeeButton.grid(row=0, column=2,padx=15, pady=10)
+
+# Progress Tracker Frame 
+progressFrame=ctk.CTkFrame(mainFrame, width=300, height=200)
+progressFrame.grid(row=0, column=1, sticky="ne", padx=20, pady=20)
+progressFrame.grid_rowconfigure((0,1,2,3,4), weight=1)
+progressFrame.grid_columnconfigure((0,1), weight=1)
+# Progress Tracker Title
+progressTitle=ctk.CTkLabel(progressFrame, text="Progress Tracker", font=("Belleza", 18, "bold"), text_color="black")
+progressTitle.grid(row=0, column=0, columnspan=2, pady=10)
+# Date Label 
+dateLabel=ctk.CTkLabel(progressFrame, text="05/06/2025", font=("Monospace", 12), text_color="black")
+dateLabel.grid(row=1, column=0, columnspan=2, sticky="w", padx=20)
+# Subjects 
+psychologyLabel=ctk.CTkLabel(progressFrame, text="✅ Psychology", font=("Monoid", 14),text_color="black")
+psychologyLabel.grid(row=2, column=0, sticky="w", padx=20, pady=5)
+psychologyStatus= ctk.CTkLabel(progressFrame, text="DONE", font=("Arial", 12, "bold"), text_color="white", fg_color="#ff6b6b", corner_radius=10, width=60, height=20)
+psychologyStatus.grid(row=2, column=1, sticky="e", padx=20, pady=5)
+
+
 app.mainloop()
