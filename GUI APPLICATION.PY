@@ -80,5 +80,13 @@ psychologyLabel.grid(row=2, column=0, sticky="w", padx=20, pady=5)
 psychologyStatus= ctk.CTkLabel(progressFrame, text="DONE", font=("Arial", 12, "bold"), text_color="white", fg_color="#ff6b6b", corner_radius=10, width=60, height=20)
 psychologyStatus.grid(row=2, column=1, sticky="e", padx=20, pady=5)
 
+englishLabel=ctk.CTkLabel(progressFrame, text="⏳ English", font=("Monoid", 14), text_color="black")
+englishLabel.grid(row=3, column=0, sticky="w", padx=20, pady=5)
+englishStatus= ctk.CTkLabel(progressFrame, text="IN PROGRESS", font=("Arial", 12, "bold"), text_color="white", fg_color="#ff6b6b", corner_radius=10, width=60, height=20)
+englishStatus.grid(row=3, column=2, sticky="e", padx=20, pady=5)
 
+mathLabel=ctk.CTkLabel(progressFrame, text="🔲 Math", font=("Monoid", 14), text_color="black")
+mathLabel.grid(row=4, column=0, sticky="w", padx=20, pady=5)
+mathStatus= ctk.CTkLabel(progressFrame, text="NOT STARTED/ NOT DONE", font=("Arial", 12, "bold"), text_color="white", fg_color="#ff6b6b", corner_radius=10, width=60, height=20)
+mathStatus.grid(row=4, column=4, sticky="e", padx=20, pady=5)
 app.mainloop()
