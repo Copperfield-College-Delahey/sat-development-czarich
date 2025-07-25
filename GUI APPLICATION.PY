@@ -5,16 +5,18 @@ app = ctk.CTk()
 app.title("Cozy Mind Study App")
 app.geometry("1000x650")
 # Configure app window grid 
-app.grid_rowconfigure((0,1,2),weight=1) #Top frame - fixed height 
-app.grid_columnconfigure(0, weight=1)
+app.grid_rowconfigure(0, weight=0) #Top frame - fixed height 
+app.grid_columnconfigure(0, weight=1) #Main content:expands
 # Top Navigation Bar 
-topFrame = ctk.CTkFrame(app, height= 80)
-topFrame.grid(row=0, column=0, sticky="ew", padx=10, pady=10)
+topFrame = ctk.CTkFrame(app, height= 100)
+topFrame.grid(row=0, column=0, sticky="ew")
 topFrame.grid_columnconfigure(0, weight=1)
+topFrame.grid_rowconfigure(0, weight=1)
+topFrame.grid_rowconfigure(1, weight=1)
 titleLabel= ctk.CTkLabel (topFrame, text="Cozy Mind", font=("Belleza", 30))
 titleLabel.grid(row=0, column=0, sticky="w", padx=15, pady=15)
 menuButtonFrame=ctk.CTkFrame(topFrame)
-menuButtonFrame.grid(row=1, column=0, sticky="se", padx=15, pady=15)
+menuButtonFrame.grid(row=1, column=0, sticky="se")
 tasksButton=ctk.CTkButton(menuButtonFrame, text_color="black", text="Tasks List", font=("Belleza", 16), corner_radius=10, height=40, width=110, fg_color= "#6dc6e6", hover_color="#e6b7c9", cursor= "hand2")
 tasksButton.grid(row=1, column=1, sticky="w",  padx=5)
 tasksButton=ctk.CTkButton(menuButtonFrame, text_color="black", text="Edit Theme", font=("Belleza", 16), corner_radius=10, height=40, width=110, fg_color="#6dc6e6", hover_color="#e6b7c9", cursor= "hand2")
@@ -29,6 +31,7 @@ tasksButton.grid(row=1, column=5, sticky="w", padx=5)
 mainFrame = ctk.CTkFrame(app)
 mainFrame.grid(row=1, column=0, sticky="nsew", padx=10, pady=10)
 mainFrame.grid_rowconfigure(0, weight=1)
+mainFrame.grid_rowconfigure(4, weight=0) #Add this line 
 mainFrame.grid_columnconfigure(0, weight=1)
 # Configure the timer frame to align left
 timerFrame=ctk.CTkFrame(mainFrame)
@@ -75,31 +78,54 @@ progressTitle.grid(row=0, column=0, columnspan=2, pady=10)
 dateLabel=ctk.CTkLabel(progressFrame, text="05/06/2025", font=("Monospace", 12), text_color="black")
 dateLabel.grid(row=1, column=0, columnspan=2, sticky="w", padx=20)
 # Subjects 
-psychologyLabel=ctk.CTkLabel(progressFrame, text="✅ Psychology", font=("Monoid", 14),text_color="black")
+psychologyLabel=ctk.CTkLabel(progressFrame, text="✅ Psychology", font=("Monoid", 18),text_color="black")
 psychologyLabel.grid(row=2, column=0, sticky="w", padx=20, pady=5)
 psychologyStatus= ctk.CTkLabel(progressFrame, text="DONE", font=("Arial", 12, "bold"), text_color="white", fg_color="#ff6b6b", corner_radius=10, width=60, height=20)
 psychologyStatus.grid(row=2, column=1, sticky="e", padx=20, pady=5)
 
-englishLabel=ctk.CTkLabel(progressFrame, text="⏳ English", font=("Monoid", 14), text_color="black")
+englishLabel=ctk.CTkLabel(progressFrame, text="⏳ English", font=("Monoid", 18), text_color="black")
 englishLabel.grid(row=3, column=0, sticky="w", padx=20, pady=5)
 englishStatus= ctk.CTkLabel(progressFrame, text="IN PROGRESS", font=("Arial", 12, "bold"), text_color="white", fg_color="#ff6b6b", corner_radius=10, width=60, height=20)
 englishStatus.grid(row=3, column=1, sticky="e", padx=20, pady=5)
 
-mathLabel=ctk.CTkLabel(progressFrame, text="🔲 Math", font=("Monoid", 14), text_color="black")
+mathLabel=ctk.CTkLabel(progressFrame, text="🔲 Math", font=("Monoid", 18), text_color="black")
 mathLabel.grid(row=4, column=0, sticky="w", padx=20, pady=5)
 mathStatus= ctk.CTkLabel(progressFrame, text="NOT STARTED/NOT DONE", font=("Arial", 12, "bold"), text_color="white", fg_color="#ff6b6b", corner_radius=10, width=60, height=20)
 mathStatus.grid(row=4, column=1, sticky="e", padx=20, pady=5)
 #Reminder 
-reminderFrame=ctk.CTkFrame(mainFrame, fg_color="#f4eadf", corner_radius=10, width=200, height=120)
-reminderFrame.grid(row=4, column=0, sticky="w", padx=20, pady=5)
+reminderFrame=ctk.CTkFrame(mainFrame, fg_color="#f4eadf", corner_radius=10, width=200, height=180)
+reminderFrame.grid(row=1, column=0, sticky="w", padx=20, pady=5)
 # Cat emoji and REMEMBER bubble 
 headerFrame=ctk.CTkFrame(reminderFrame, fg_color="#f5a6a6", corner_radius=15, width=180, height=35)
 headerFrame.grid(row=0, column=0, padx=5, pady=5)
-catLabel = ctk.CTkLabel(headerFrame, text="🐱", font=("Arial", 16))
+catLabel = ctk.CTkLabel(headerFrame, text="🐱", font=("Arial", 20))
 catLabel.grid(row=0, column=0, padx=5, pady=5)
-rememberLabel=ctk.CTkLabel(headerFrame, text="REMEMBER", font=("Arial", 10, "bold"), text_color="black")
+rememberLabel=ctk.CTkLabel(headerFrame, text="REMEMBER", font=("Arial", 20, "bold"), text_color="black")
 rememberLabel.grid(row=0, column=1, padx=5, pady=5)
-#Reminder text
-reminderText=ctk.CTkLabel(reminderFrame, text="📌 Reminder! English Essay (due Tomorrow)", font=("MonaLisa", 10, "bold"), text_color="black")
+# Reminder text
+reminderText=ctk.CTkLabel(reminderFrame, text="📌 Reminder! English Essay (due Tomorrow)", font=("MonaLisa", 15, "bold"), text_color="black")
 reminderText.grid(row=1, column=0, padx=10, pady=5)
+# Simple Settings Menu
+settingsFrame=ctk.CTkFrame(mainFrame, fg_color="#f0d0b0", corner_radius=5, width=150, height=100)
+settingsFrame.grid(row=1, column=1, padx=10, pady=10, sticky="w")
+# Red/orange left border (using a thin frame)
+borderFrame=ctk.CTkFrame(settingsFrame, fg_color="#ff6b6b",width=3, height=90)
+borderFrame.grid(row=0, column=0, rowspan=4, padx=(5,0), sticky="nw")
+# Settings title 
+settingsTitle=ctk.CTkLabel(settingsFrame, text="Settings", font=("MonaLisa", 12, "bold"), text_color="black")
+settingsTitle.grid(row=0, column=1, padx=10, pady=(5,2), sticky="w")
+# Cozy Themes
+cozyLabel=ctk.CTkLabel(settingsFrame, text="Cozy Themes", font=("MonaLisa", 12), text_color="black")
+cozyLabel.grid(row=1, column=1, padx=10, pady=1, sticky="w")
+# Pastel Themes
+pastelLabel=ctk.CTkLabel(settingsFrame, text="Pastel Themes", font=("MonaLisa", 12), text_color="black")
+pastelLabel.grid(row=2, column=1, padx=10, pady=1, sticky="w")
+# Nuetral Themes
+neutralLabel=ctk.CTkLabel(settingsFrame, text="Pastel Themes", font=("Arial", 10), text_color="blue")
+neutralLabel.grid(row=3, column=1, padx=10, pady=(1,5), sticky="w")
+# Virtual Pet Section 
+viritualPetFrame=ctk.CTkFrame(mainFrame, fg_color="#f0dbdb", corner_radius=10, width=200, height=150)
+viritualPetFrame.grid(row=1, column=2, padx=10, pady=10, sticky="w")
+# Virtual Pet Title
+vir
 app.mainloop()
