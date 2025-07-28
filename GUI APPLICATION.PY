@@ -123,9 +123,36 @@ pastelLabel.grid(row=2, column=1, padx=10, pady=1, sticky="w")
 # Nuetral Themes
 neutralLabel=ctk.CTkLabel(settingsFrame, text="Pastel Themes", font=("Arial", 10), text_color="blue")
 neutralLabel.grid(row=3, column=1, padx=10, pady=(1,5), sticky="w")
-# Virtual Pet Section 
-viritualPetFrame=ctk.CTkFrame(mainFrame, fg_color="#f0dbdb", corner_radius=10, width=200, height=150)
-viritualPetFrame.grid(row=1, column=2, padx=10, pady=10, sticky="w")
-# Virtual Pet Title
-vir
+# Create the settings frame 
+settingsFrame=ctk.CTkFrame(mainFrame, width=200, height=160, fg_color="#efc5ab", corner_radius=40)
+settingsFrame.grid(row=0, column=3, padx=20, pady=20, sticky="n")
+# Title Row with Icon 
+settingsIcon=ctk.CTkLabel(settingsFrame, text="⚙️", font=("Arial", 30))
+settingsIcon.grid(row=0, column=0, padx=5, pady=10, sticky="w")
+settingsTitle=ctk.CTkLabel(settingsFrame, text="Settings", font=("MonaLisa", 18, "bold"))
+settingsTitle.grid(row=0, column=1, padx=5, pady=10, sticky="w")
+# First Switch: Notification 
+notificationSwitch = ctk.CTkSwitch(settingsFrame,
+                                    text="Notification",
+                                    onvalue="ON",
+                                    offvalue="OFF",
+                                    switch_width=50,
+                                    switch_height=25,
+                                    progress_color="#e08989",
+                                    button_color="#fff3eb",
+                                    fg_color="#e08989",
+                                    font=("MonaLisa", 14))
+notificationSwitch.grid(row=1, column=0, columnspan=2, padx=10, pady=5, sticky="w")
+# Second Switch: Receive Notifications 
+reminderSwitch=ctk.CTkSwitch(settingsFrame,
+                            text="Receive Notifications",
+                            onvalue="ON",
+                            offvalue="OFF",
+                            switch_width=50,
+                            switch_height=25,
+                            progress_color="#e08989",
+                            button_color="#fff3eb",
+                            fg_color="#e08989",
+                            font=("MonaLisa", 14))
+reminderSwitch.grid(row=2, column=0, columnspan=2, padx=20, pady=5, sticky="w")
 app.mainloop()
