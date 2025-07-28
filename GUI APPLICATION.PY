@@ -34,8 +34,8 @@ mainFrame.grid_rowconfigure(0, weight=1)
 mainFrame.grid_rowconfigure(4, weight=0) #Add this line 
 mainFrame.grid_columnconfigure(0, weight=1)
 # Configure the timer frame to align left
-timerFrame=ctk.CTkFrame(mainFrame)
-timerFrame.grid(row=0, column=0, sticky="nw", padx=20, pady=20)
+timerFrame=ctk.CTkFrame(mainFrame, width=350, height=400, fg_color="#d3d3d3")
+timerFrame.grid(row=0, column=0, sticky="nw", padx=2, pady=2)
 timerFrame.grid_rowconfigure(0, weight=1)
 timerFrame.grid_columnconfigure(0, weight=1)
 #Create a circular frame for the timer 
@@ -115,23 +115,23 @@ borderFrame.grid(row=0, column=0, rowspan=4, padx=(5,0), sticky="nw")
 settingsTitle=ctk.CTkLabel(settingsFrame, text="Settings", font=("MonaLisa", 12, "bold"), text_color="black")
 settingsTitle.grid(row=0, column=1, padx=10, pady=(5,2), sticky="w")
 # Cozy Themes
-cozyLabel=ctk.CTkLabel(settingsFrame, text="Cozy Themes", font=("MonaLisa", 12), text_color="black")
+cozyLabel=ctk.CTkLabel(settingsFrame, text="● Cozy Themes", font=("MonaLisa", 12), text_color="black")
 cozyLabel.grid(row=1, column=1, padx=10, pady=1, sticky="w")
 # Pastel Themes
-pastelLabel=ctk.CTkLabel(settingsFrame, text="Pastel Themes", font=("MonaLisa", 12), text_color="black")
+pastelLabel=ctk.CTkLabel(settingsFrame, text="● Pastel Themes", font=("MonaLisa", 12), text_color="black")
 pastelLabel.grid(row=2, column=1, padx=10, pady=1, sticky="w")
 # Nuetral Themes
-neutralLabel=ctk.CTkLabel(settingsFrame, text="Pastel Themes", font=("Arial", 10), text_color="blue")
+neutralLabel=ctk.CTkLabel(settingsFrame, text="● Pastel Themes", font=("MonaLisa", 12), text_color="black")
 neutralLabel.grid(row=3, column=1, padx=10, pady=(1,5), sticky="w")
 # Create the settings frame 
-settingsFrame=ctk.CTkFrame(mainFrame, width=200, height=160, fg_color="#efc5ab", corner_radius=40)
-settingsFrame.grid(row=0, column=3, padx=20, pady=20, sticky="n")
-# Title Row with Icon 
-settingsIcon=ctk.CTkLabel(settingsFrame, text="⚙️", font=("Arial", 30))
+settingsFrame=ctk.CTkFrame(mainFrame, width=250, height=180, fg_color="#efc5ab", corner_radius=28)
+settingsFrame.grid(row=0, column=4, padx=20, pady=20, sticky="n")
+settingsIcon=ctk.CTkLabel(settingsFrame, text="⚙️", font=("Arial", 25))
 settingsIcon.grid(row=0, column=0, padx=5, pady=10, sticky="w")
-settingsTitle=ctk.CTkLabel(settingsFrame, text="Settings", font=("MonaLisa", 18, "bold"))
+# Title Row with Icon 
+settingsTitle=ctk.CTkLabel(settingsFrame, text="Settings", font=("MonaLisa", 20, "bold"))
 settingsTitle.grid(row=0, column=1, padx=5, pady=10, sticky="w")
-# First Switch: Notification 
+# First Switch: Notification
 notificationSwitch = ctk.CTkSwitch(settingsFrame,
                                     text="Notification",
                                     onvalue="ON",
@@ -155,4 +155,5 @@ reminderSwitch=ctk.CTkSwitch(settingsFrame,
                             fg_color="#e08989",
                             font=("MonaLisa", 14))
 reminderSwitch.grid(row=2, column=0, columnspan=2, padx=20, pady=5, sticky="w")
+
 app.mainloop()
