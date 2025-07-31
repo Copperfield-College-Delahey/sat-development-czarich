@@ -97,7 +97,7 @@ reminderFrame=ctk.CTkFrame(mainFrame, fg_color="#f4eadf", corner_radius=10, widt
 reminderFrame.grid(row=1, column=0, sticky="w", padx=20, pady=5)
 # Cat emoji and REMEMBER bubble 
 headerFrame=ctk.CTkFrame(reminderFrame, fg_color="#f5a6a6", corner_radius=15, width=180, height=35)
-headerFrame.grid(row=0, column=0, padx=5, pady=5)
+headerFrame.grid(row=0, column=0, padx=15, pady=5)
 catLabel = ctk.CTkLabel(headerFrame, text="🐱", font=("Arial", 20))
 catLabel.grid(row=0, column=0, padx=5, pady=5)
 rememberLabel=ctk.CTkLabel(headerFrame, text="REMEMBER", font=("Arial", 20, "bold"), text_color="black")
@@ -106,22 +106,22 @@ rememberLabel.grid(row=0, column=1, padx=5, pady=5)
 reminderText=ctk.CTkLabel(reminderFrame, text="📌 Reminder! English Essay (due Tomorrow)", font=("MonaLisa", 15, "bold"), text_color="black")
 reminderText.grid(row=1, column=0, padx=10, pady=5)
 # Simple Settings Menu
-settingsFrame=ctk.CTkFrame(mainFrame, fg_color="#f0d0b0", corner_radius=5, width=150, height=100)
-settingsFrame.grid(row=1, column=1, padx=10, pady=10, sticky="w")
+settingsFrame=ctk.CTkFrame(mainFrame, fg_color="#f0d0b0", corner_radius=5, width=70, height=30)
+settingsFrame.grid(row=1, column=1, padx=10, pady=10, sticky="n")
 # Red/orange left border (using a thin frame)
-borderFrame=ctk.CTkFrame(settingsFrame, fg_color="#ff6b6b",width=3, height=90)
-borderFrame.grid(row=0, column=0, rowspan=4, padx=(5,0), sticky="nw")
+borderFrame=ctk.CTkFrame(settingsFrame, fg_color="#ff6b6b",width=5, height=300)
+borderFrame.grid(row=0, column=0, rowspan=4, padx=(10,0), sticky="nsw")
 # Settings title 
-settingsTitle=ctk.CTkLabel(settingsFrame, text="Settings", font=("MonaLisa", 12, "bold"), text_color="black")
+settingsTitle=ctk.CTkLabel(settingsFrame, text="Settings", font=("MonaLisa", 20, "bold"), text_color="black")
 settingsTitle.grid(row=0, column=1, padx=10, pady=(5,2), sticky="w")
 # Cozy Themes
-cozyLabel=ctk.CTkLabel(settingsFrame, text="● Cozy Themes", font=("MonaLisa", 12), text_color="black")
+cozyLabel=ctk.CTkLabel(settingsFrame, text="● Cozy Themes", font=("MonaLisa", 20), text_color="black")
 cozyLabel.grid(row=1, column=1, padx=10, pady=1, sticky="w")
 # Pastel Themes
-pastelLabel=ctk.CTkLabel(settingsFrame, text="● Pastel Themes", font=("MonaLisa", 12), text_color="black")
+pastelLabel=ctk.CTkLabel(settingsFrame, text="● Pastel Themes", font=("MonaLisa", 20), text_color="black")
 pastelLabel.grid(row=2, column=1, padx=10, pady=1, sticky="w")
 # Nuetral Themes
-neutralLabel=ctk.CTkLabel(settingsFrame, text="● Pastel Themes", font=("MonaLisa", 12), text_color="black")
+neutralLabel=ctk.CTkLabel(settingsFrame, text="● Pastel Themes", font=("MonaLisa", 20), text_color="black")
 neutralLabel.grid(row=3, column=1, padx=10, pady=(1,5), sticky="w")
 # Create the settings frame 
 settingsFrame=ctk.CTkFrame(mainFrame, width=250, height=180, fg_color="#efc5ab", corner_radius=28)
@@ -156,38 +156,38 @@ reminderSwitch=ctk.CTkSwitch(settingsFrame,
                             font=("MonaLisa", 14))
 reminderSwitch.grid(row=2, column=0, columnspan=2, padx=20, pady=5, sticky="w")
 # Task Lists Section 
-taskListFrame=ctk.CTkFrame(mainFrame, fg_color="#f6e5cb", corner_radius=10, width=700, height=160)
+taskListFrame=ctk.CTkFrame(mainFrame, fg_color="#f6e5cb", corner_radius=15, width=700, height=160)
 taskListFrame.grid(row=1, column=4, padx=10, pady=10, sticky="nsew") # Use nsew to expand
 taskListFrame.grid_columnconfigure(0, weight=1)
 # Title 
 taskTitle=ctk.CTkLabel(taskListFrame, text="Task List |", font=("MonaLisa", 16, "bold"), text_color="black")
-taskTitle.grid(row=0, column=0, columnspan=2, padx=15, pady=(15, 10), sticky="w")
+taskTitle.grid(row=0, column=0, columnspan=2, padx=20, pady=(15, 10), sticky="w")
 # Psychology section 
 psychologyFrame=ctk.CTkFrame(taskListFrame, fg_color="#e6c7bd", corner_radius=8, width=250, height=35)
 psychologyFrame.grid(row=1, column=0, padx=15, pady=(0, 5), sticky="ew")
-psychologyIcon=ctk.CTkLabel(psychologyFrame, text="✅", font=("MonaLisa", 12, "bold"))
+psychologyIcon=ctk.CTkLabel(psychologyFrame, text="✅", font=("MonaLisa", 16, "bold"))
 psychologyIcon.grid(row=0, column=0, padx=5, pady=5)
-psychologyLabel=ctk.CTkLabel(psychologyFrame, text="●PSYCHOLOGY", font=("MonaLisa", 12, "bold"), text_color="black")
+psychologyLabel=ctk.CTkLabel(psychologyFrame, text="●PSYCHOLOGY", font=("MonaLisa", 15, "bold"), text_color="black")
 psychologyLabel.grid(row=0, column=1, padx=5, pady=5, sticky="w")
-psychologyTask=ctk.CTkLabel(taskListFrame, text="● answer section question", font=("MonaLisa", 12), text_color="black")
+psychologyTask=ctk.CTkLabel(taskListFrame, text="● answer section question", font=("MonaLisa", 13), text_color="black")
 psychologyTask.grid(row=2, column=0, padx=15, pady=2, sticky="w")
 # English section
 englishFrame=ctk.CTkFrame(taskListFrame, fg_color="#e6c7bd", corner_radius=8, width=250, height=35)
 englishFrame.grid(row=3, column=0, padx=15, pady=(0, 5), sticky="ew")
-englishIcon=ctk.CTkLabel(englishFrame, text="⏳", font=("MonaLisa", 12, "bold"))
+englishIcon=ctk.CTkLabel(englishFrame, text="⏳", font=("MonaLisa", 16, "bold"))
 englishIcon.grid(row=0, column=0, padx=5, pady=5)
-englishLabel=ctk.CTkLabel(englishFrame, text="●ENGLISH", font=("MonaLisa", 12, "bold"), text_color="black")
+englishLabel=ctk.CTkLabel(englishFrame, text="●ENGLISH", font=("MonaLisa", 15, "bold"), text_color="black")
 englishLabel.grid(row=0, column=1, padx=5, pady=5, sticky="w")
-englishTask=ctk.CTkLabel(taskListFrame, text="● write essay", font=("MonaLisa", 12), text_color="black")
+englishTask=ctk.CTkLabel(taskListFrame, text="● write essay", font=("MonaLisa", 13), text_color="black")
 englishTask.grid(row=4, column=0, padx=15, pady=2, sticky="w")
 # Math section
 mathFrame=ctk.CTkFrame(taskListFrame, fg_color="#e6c7bd", corner_radius=8, width=250, height=35)
 mathFrame.grid(row=5, column=0, padx=15, pady=(0, 5), sticky="ew")
-mathIcon=ctk.CTkLabel(mathFrame, text="🔲", font=("MonaLisa", 12, "bold"))
+mathIcon=ctk.CTkLabel(mathFrame, text="🔲", font=("MonaLisa", 16, "bold"))
 mathIcon.grid(row=0, column=0, padx=5, pady=5)
-mathLabel=ctk.CTkLabel(mathFrame, text="●MATH", font=("MonaLisa", 12, "bold"), text_color="black")
+mathLabel=ctk.CTkLabel(mathFrame, text="●MATH", font=("MonaLisa", 15, "bold"), text_color="black")
 mathLabel.grid(row=0, column=1, padx=5, pady=5, sticky="w")
-mathTask=ctk.CTkLabel(taskListFrame, text="● answer 1A questions", font=("MonaLisa", 12), text_color="black")
+mathTask=ctk.CTkLabel(taskListFrame, text="● answer 1A questions", font=("MonaLisa", 13), text_color="black")
 mathTask.grid(row=6, column=0, columnspan=2, padx=15, pady=2, sticky="w")
 # Add new task button 
 addTaskButton=ctk.CTkButton(
@@ -195,10 +195,11 @@ addTaskButton=ctk.CTkButton(
     text="➕ Add New Task",
     font=("MonaLisa", 12, "bold"),
     text_color="black",
-    fg_color="gray",
+    fg_color="#e08989",
     hover_color="#e6d7f0",
     width=120,
-    height=25
+    height=30
 )
-addTaskButton.grid(row=7, column=0, columnspan=2, padx=15, pady=(10, 15), sticky="e")
+addTaskButton.grid(row=6, column=2, columnspan=2, padx=15, pady=(10, 15), sticky="e")
+
 app.mainloop()
