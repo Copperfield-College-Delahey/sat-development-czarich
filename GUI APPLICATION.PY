@@ -3,7 +3,7 @@ import customtkinter as ctk
 
 app = ctk.CTk()
 app.title("Cozy Mind Study App")
-app.geometry("1000x650")
+app.geometry("1500x750")
 # Configure app window grid 
 app.grid_rowconfigure(0, weight=0) #Top frame - fixed height 
 app.grid_columnconfigure(0, weight=1) #Main content:expands
@@ -155,5 +155,50 @@ reminderSwitch=ctk.CTkSwitch(settingsFrame,
                             fg_color="#e08989",
                             font=("MonaLisa", 14))
 reminderSwitch.grid(row=2, column=0, columnspan=2, padx=20, pady=5, sticky="w")
-
+# Task Lists Section 
+taskListFrame=ctk.CTkFrame(mainFrame, fg_color="#f6e5cb", corner_radius=10, width=700, height=160)
+taskListFrame.grid(row=1, column=4, padx=10, pady=10, sticky="nsew") # Use nsew to expand
+taskListFrame.grid_columnconfigure(0, weight=1)
+# Title 
+taskTitle=ctk.CTkLabel(taskListFrame, text="Task List |", font=("MonaLisa", 16, "bold"), text_color="black")
+taskTitle.grid(row=0, column=0, columnspan=2, padx=15, pady=(15, 10), sticky="w")
+# Psychology section 
+psychologyFrame=ctk.CTkFrame(taskListFrame, fg_color="#e6c7bd", corner_radius=8, width=250, height=35)
+psychologyFrame.grid(row=1, column=0, padx=15, pady=(0, 5), sticky="ew")
+psychologyIcon=ctk.CTkLabel(psychologyFrame, text="✅", font=("MonaLisa", 12, "bold"))
+psychologyIcon.grid(row=0, column=0, padx=5, pady=5)
+psychologyLabel=ctk.CTkLabel(psychologyFrame, text="●PSYCHOLOGY", font=("MonaLisa", 12, "bold"), text_color="black")
+psychologyLabel.grid(row=0, column=1, padx=5, pady=5, sticky="w")
+psychologyTask=ctk.CTkLabel(taskListFrame, text="● answer section question", font=("MonaLisa", 12), text_color="black")
+psychologyTask.grid(row=2, column=0, padx=15, pady=2, sticky="w")
+# English section
+englishFrame=ctk.CTkFrame(taskListFrame, fg_color="#e6c7bd", corner_radius=8, width=250, height=35)
+englishFrame.grid(row=3, column=0, padx=15, pady=(0, 5), sticky="ew")
+englishIcon=ctk.CTkLabel(englishFrame, text="⏳", font=("MonaLisa", 12, "bold"))
+englishIcon.grid(row=0, column=0, padx=5, pady=5)
+englishLabel=ctk.CTkLabel(englishFrame, text="●ENGLISH", font=("MonaLisa", 12, "bold"), text_color="black")
+englishLabel.grid(row=0, column=1, padx=5, pady=5, sticky="w")
+englishTask=ctk.CTkLabel(taskListFrame, text="● write essay", font=("MonaLisa", 12), text_color="black")
+englishTask.grid(row=4, column=0, padx=15, pady=2, sticky="w")
+# Math section
+mathFrame=ctk.CTkFrame(taskListFrame, fg_color="#e6c7bd", corner_radius=8, width=250, height=35)
+mathFrame.grid(row=5, column=0, padx=15, pady=(0, 5), sticky="ew")
+mathIcon=ctk.CTkLabel(mathFrame, text="🔲", font=("MonaLisa", 12, "bold"))
+mathIcon.grid(row=0, column=0, padx=5, pady=5)
+mathLabel=ctk.CTkLabel(mathFrame, text="●MATH", font=("MonaLisa", 12, "bold"), text_color="black")
+mathLabel.grid(row=0, column=1, padx=5, pady=5, sticky="w")
+mathTask=ctk.CTkLabel(taskListFrame, text="● answer 1A questions", font=("MonaLisa", 12), text_color="black")
+mathTask.grid(row=6, column=0, columnspan=2, padx=15, pady=2, sticky="w")
+# Add new task button 
+addTaskButton=ctk.CTkButton(
+    taskListFrame,
+    text="➕ Add New Task",
+    font=("MonaLisa", 12, "bold"),
+    text_color="black",
+    fg_color="gray",
+    hover_color="#e6d7f0",
+    width=120,
+    height=25
+)
+addTaskButton.grid(row=7, column=0, columnspan=2, padx=15, pady=(10, 15), sticky="e")
 app.mainloop()
