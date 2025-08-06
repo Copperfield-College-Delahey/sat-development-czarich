@@ -16,6 +16,7 @@ current_time= 25 * 60 # 25 minutes in second
 work_time=25 * 60
 break_time=5 * 60 
 is_break=False
+
 # Configure app window grid 
 app.grid_rowconfigure(0, weight=0) #Top frame - fixed height 
 app.grid_columnconfigure(0, weight=1) #Main content:expands
@@ -62,6 +63,11 @@ circularFrame.grid(row=0, column=0, padx=10, pady=10)
 circularFrame.grid_propagate(False) #Maintain the size 
 circularFrame.grid_rowconfigure(0, weight=1)
 circularFrame.grid_columnconfigure(0, weight=1)
+timerLabel=ctk.CTkLabel(circularFrame,
+                        text="5:00",
+                        font=("Consolas", 36), 
+                          text_color="#5d4e37")
+timerLabel.grid(row=0, column=0)
 
 timerLabel = ctk.CTkLabel(circularFrame,
                           text="25:00", 
@@ -75,9 +81,9 @@ controlsFrame = ctk.CTkFrame(timerFrame)
 controlsFrame.grid(row=1, column=0, pady=10)
 pauseButton = ctk.CTkButton(controlsFrame, text_color="black", font=("Belleza", 30), text ="⏸️", width=60, height=50, fg_color="#87CEEB", hover_color="#7BC4E8", border_width=0, command=lambda: start_timer() if not timer_running or timer_paused else pause_timer())
 pauseButton.grid (row=0, column=0, padx=5, pady=5)
-heartButton = ctk.CTkButton(controlsFrame, text_color="pink", font=("Belleza", 30), text="🩷", width=60, height=50, fg_color="#fd9ef8", hover_color="#6dc6e6", border_width=0 )
+heartButton = ctk.CTkButton(controlsFrame, text_color="pink", font=("Belleza", 30), text="🩷", width=60, height=50, fg_color="#fd9ef8", hover_color="#6dc6e6", border_width=0, command=lambda: pause_timer())
 heartButton.grid (row=0, column=1, padx=5, pady=5)
-coffeeButton = ctk.CTkButton(controlsFrame, text_color="brown", font=("Belleza", 30), text="☕", width=60, height=50,  fg_color="#dab185", hover_color="#6dc6e6", border_width=0)
+coffeeButton = ctk.CTkButton(controlsFrame, text_color="brown",font=("Belleza",30), text="☕", width=60,height=50, fg_color="#dab185", hover_color="#6dc6e6",border_width=0, command=lambda: start_break())
 coffeeButton.grid(row=0, column=2,padx=5, pady=5)
 
 # Progress Tracker Frame 
@@ -175,6 +181,7 @@ reminderSwitch.grid(row=2, column=0, columnspan=2, padx=20, pady=5, sticky="w")
 taskListFrame=ctk.CTkFrame(mainFrame, fg_color="#f6e5cb", corner_radius=15, width=700, height=130)
 taskListFrame.grid(row=1, column=4, padx=10, pady=10, sticky="nsew") # Use nsew to expand
 taskListFrame.grid_columnconfigure(0, weight=1)
+    
 # Title 
 taskTitle=ctk.CTkLabel(taskListFrame, text="Task List |", font=("MonaLisa", 16, "bold"), text_color="black")
 taskTitle.grid(row=0, column=0, columnspan=2, padx=20, pady=(15, 10), sticky="w")
@@ -213,22 +220,26 @@ addTaskButton=ctk.CTkButton(
     text_color="black",
     fg_color="#e08989",
     hover_color="#e6d7f0",
-    width=120,
+    width=100,
     height=30
 )
 addTaskButton.grid(row=6, column=2, columnspan=2, padx=15, pady=(10, 15), sticky="e")
 
-# ADD ALL THE TIMER FUNCTIONS:
+# TIMER FUNCTIONS:
 def format_time(total_seconds):
-    """Convert seconds to MM:SS format"""
     minutes = total_seconds // 60 
     seconds = total_seconds % 60
     return f"{minutes:02d}:{seconds:02d}"
 def update_timer_display():
-    """Update the timer label"""
     timerLabel.configure(text=format_time(current_time))
+def update_timer():
+    if remaining_time >= 0:
+        minutes = remaining_time // 60
+        seconds= remaining_time % 60 
+        timerLabel.configure(text=f"{minutes:02d}:{seconds:02d}")
+        if timer_running:
+            app.after(1000, timer_countdown)
 def timer_countdown():
-    """Main timer function - runs in separate thread"""
     global current_time, timer_running, timer_paused, is_break 
 
     while timer_running:
@@ -236,10 +247,10 @@ def timer_countdown():
             current_time-= 1 
             # Update display in main thread 
             app.after(0, update_timer_display)
-            time.sleep
+            time.sleep(1) # ← Proper delay
         elif current_time ==0:
             # Timer finished 
-            app.after(0, timer_finished)
+            app.after(0, timer_finished) # ← Fixed missing delay argument
             break 
         else: 
             time.sleep(0.1) # small delay when paused 
@@ -248,18 +259,16 @@ def timer_finished():
     global is_break, current_time 
 
     if is_break:
-        # Break finished, start work session 
         current_time = work_time 
         is_break = False 
         timerLabel.configure(text_color="#5d4e37") # Work Color 
     else:
-        # Work finished, start break 
         current_time = break_time
         is_break = True 
         timerLabel.configure(text_color="#4CAF50") # Break Color 
     update_timer_display()
-    # Auto_start next session or pause 
-    start_timer()
+    start_timer()  # Auto_start next session or pause 
+
 def start_timer():
     """Start the timer"""
     global timer_running, timer_paused
@@ -276,15 +285,21 @@ def start_timer():
         timer_paused = False
         pauseButton.configure(text="⏸️")
 def pause_timer():
-    """Pause/resume the timer"""
     global timer_paused
-    
     if timer_running:
         timer_paused = not timer_paused
         if timer_paused:
             pauseButton.configure(text="▶️")
         else:
             pauseButton.configure(text="⏸️")
+def start_break():
+    global remaining_time, timer_running
+    if not timer_running:
+        timer_running= False 
+        remaining_time = 0 
+        timer_running = True 
+        update_timer_display()
+        print("5- minute berak started")
 
 def reset_timer():
     """Reset timer to 25 minutes"""
@@ -297,8 +312,6 @@ def reset_timer():
     update_timer_display()
     pauseButton.configure(text="▶️")
     timerLabel.configure(text_color="#5d4e37")
-
-# Initialize timer display
+# Start with display update 
 update_timer_display()
-
 app.mainloop()
